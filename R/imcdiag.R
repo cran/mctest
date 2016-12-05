@@ -1,5 +1,5 @@
 imcdiag<-function(x, y, method=NULL, na.rm=TRUE, corr=FALSE, vif=10, tol=0.1,
-                  conf=0.95,cvif=10, leamer=0.1,...){
+                  conf=0.95,cvif=10, leamer=0.1, all=FALSE,...){
 
   x<-as.matrix(x)
   y<-as.matrix(y)
@@ -77,17 +77,30 @@ imcdiag<-function(x, y, method=NULL, na.rm=TRUE, corr=FALSE, vif=10, tol=0.1,
 
   #CVIF
   CVIF<-VIF* (1-R2yonallx)/(1-sum(R2yonx))
+
   idiags<-vector("list")
 
+  alldiag<-cbind(VIF>=vif,
+                TOL<=tol,
+                Wi>=qf(conf, n-nvar, nvar-1),
+                Fi>=qf(conf, n-2, n-nvar+1),
+                Leamer<=leamer,
+                CVIF>=cvif,
+                R2>R2yonallx
+                )
+
+  colnames(alldiag)<-cbind("VIF", "TOL", "Wi", "Fi", "Leamer", "CVIF", "Klein")
+  rownames(alldiag)<-colnames(x)
+
   if(is.null(method)){
-    idiags<-list(VIF=VIF, TOL=TOL, Wi=Wi, Fi=Fi, Leamer=Leamer,CVIF=CVIF, Klein=R2>R2yonallx)
+    idiags<-list(VIF=VIF, TOL=TOL, Wi=Wi, Fi=Fi, Leamer=Leamer, CVIF=CVIF, Klein=R2>R2yonallx)
     idiags<-do.call(cbind,idiags)
     colnames(idiags)<-cbind("VIF", "TOL", "Wi", "Fi", "Leamer", "CVIF", "Klein")
     rownames(idiags)<-colnames(x)
-  }else{
+  }else  {
     idiags<-switch(method,
                 VIF   =cbind(VIF, VIF>=vif),
-                TOL   =cbind(TOL, TOL>=tol),
+                TOL   =cbind(TOL, TOL<=tol),
                 Wi    =cbind(Wi,  Wi>=qf(conf, n-nvar, nvar-1)), # F(n-p, p-1)
                 Fi    =cbind(Fi,  Fi>=qf(conf, n-2, n-nvar+1)),    # F(n-2, n-p+1)
                 Klein =cbind(R2,  R2yonallx, R2-R2yonallx, R2>R2yonallx),
@@ -103,26 +116,44 @@ imcdiag<-function(x, y, method=NULL, na.rm=TRUE, corr=FALSE, vif=10, tol=0.1,
   } else if (ncol(idiags)==4){
     colnames(idiags)<-c("R2j", "R2(overall)", "Difference", "detection")
     rownames(idiags)<-colnames(x)
-
   }
-  ires<-list(idiags=idiags, x=x, y=y, method=method, corr=corr, cl=cl, pval=pval, R2=R2,
-             R2yx=R2yonallx,AdjR2=AdjR2)
+
+  ires<-list(idiags=idiags, x=x, y=y, method=method, corr=corr, call=cl, pval=pval,
+             R2=R2yonallx, all=all, alldiag=alldiag)
 
   class(ires)<-"imc"
   ires
 }
 
-print.imc<-function(x,digits = max(3, getOption("digits") - 3), ...){
+print.imc<-function(x, digits = max(3, getOption("digits") - 3), ...){
   n<-nrow(x$x)
   #nvar<-ncol(x$x)
   method<-x$method
   res<-x$idiags
-  cat("\nCall:\n", paste(deparse(x$cl), sep = "\n", collapse = "\n"),
-      "\n\n", sep = "")
-  cat("\nIndividual Multicollinearity Diagnostics\n\n")
 
-  print(round(res,digits))
-  #cat("\n")
+  fcall=cat("\nCall:\n", paste(deparse(x$call), sep = "\n", collapse = "\n"), "\n\n", sep = "")
+
+  if(is.null(method) && x$all==FALSE){
+    fcall
+    cat("\nAll Individual Multicollinearity Diagnostics Result\n\n")
+    print(round(res,digits))}
+  else if (!is.null(method) && x$all==FALSE) {
+    fcall
+    cat("\n", method, "Multicollinearity Diagnostics\n\n")
+    print(round(res, digits))
+  }else if (!is.null(method) && x$all==TRUE){
+    fcall
+    cat("\n", method, "Multicollinearity Diagnostics\n\n")
+    print(round(res, digits ))
+    cat("\nAll Individual Multicollinearity Diagnostics in 0 or 1 \n\n")
+    print(1*x$alldiag)
+  } else{
+    fcall
+    cat("\nAll Individual Multicollinearity Diagnostics in 0 or 1 \n\n")
+    print(1*x$alldiag)
+  }
+
+   #cat("\n")
 
   if(!is.null(method) && ncol(res)==2 && sum(res[,2]!=0) ){
     cat("\nMulticollinearity may be due to", colnames(x$x) [which(res[,2] %in% TRUE)],"regressors\n")
@@ -143,20 +174,22 @@ print.imc<-function(x,digits = max(3, getOption("digits") - 3), ...){
     } else {
       cat(paste(colnames(x$x)[x$pval],","), "coefficient(s) are non-significant may be due to multicollinearity\n")
     } #colnames(x$x)[x$pval] )
+
+    cat("\nR-square of y on all x:", round(x$R2, digits),"\n")
     cat("\n* use method argument to check which regressors may be the reason of collinearity\n")
     cat("===================================\n")
   }
 
   if(x$corr==TRUE){
-#    cat("=========================================")
     cat("\nCorrelation Matrix\n")
     sx<-scale(x$x)/sqrt(n-1)
     corR<-t(sx)%*%sx
     ix <- abs(corR) >= 0.7 & upper.tri(corR)
 
     print(corR)
-    cat("\n ====================NOTE===================\n")
+    cat("\n====================NOTE===================\n")
     cat(sprintf("\n%s and %s may be collinear as |%f|>=0.7", colnames(corR)[row(corR)[ix]],
                 colnames(corR)[col(corR)[ix] ], corR[ix] ),"\n\n")
   }
+
 }

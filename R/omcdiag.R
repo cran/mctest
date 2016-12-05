@@ -91,7 +91,7 @@ omcdiag<-function(x, y, na.rm=TRUE, Inter=TRUE, detr=0.01, red=0.5,
            #  nvar=nvar,
              Eigval=Eigval,
              Inter=Inter,
-             x=x, cl=cl)
+             x=x, calll=cl)
 
   ores<-c(ores)
   class(ores)<-"omc"
@@ -99,7 +99,7 @@ omcdiag<-function(x, y, na.rm=TRUE, Inter=TRUE, detr=0.01, red=0.5,
 }
 
 print.omc<-function(x,digits=max(3,getOption("digits")-3),...){
-  cat("\nCall:\n", paste(deparse(x$cl), sep = "\n", collapse = "\n"),
+  cat("\nCall:\n", paste(deparse(x$call), sep = "\n", collapse = "\n"),
       "\n\n", sep = "")
   cat("\nOverall Multicollinearity Diagnostics\n\n")
 #  nvar=ncol(x$x)

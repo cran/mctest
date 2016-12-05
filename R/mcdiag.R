@@ -1,6 +1,6 @@
 mctest<-function(x, y, type=c("o","i","b"), na.rm = TRUE, Inter=TRUE, method=NULL, corr=FALSE,
                  detr=0.01, red=0.5, theil=0.5,cn=30,vif=10, tol=0.1, conf=0.95, cvif=10,
-                 leamer=0.1,...){
+                 leamer=0.1,all=FALSE,...){
 
     x<-as.matrix(x)
     y<-as.matrix(y)
@@ -33,17 +33,17 @@ mctest<-function(x, y, type=c("o","i","b"), na.rm = TRUE, Inter=TRUE, method=NUL
         else (omcdiag(x,y,Inter=TRUE, detr=detr, red=red, conf=conf, theil=theil,cn=cn,...))
 
     }else if (type=="b"){
-        if(Inter==FALSE || corr==FALSE || is.null(corr) || is.null(Inter)){
+        if(Inter==FALSE || corr==FALSE || is.null(corr) || is.null(Inter) || is.null(all) || all==FALSE){
             print(omcdiag(x,y, Inter=Inter, detr=detr, red=red, conf=conf, theil=theil,cn=cn,...))
             cat("\n===================================\n")
             print(imcdiag(x,y,method,corr=FALSE, vif=vif,tol=tol, conf=conf,cvif=cvif,
-                          leamer=leamer))
+                          leamer=leamer, all=all))
             }
         else {
             print(omcdiag(x,y,Inter=Inter,detr=detr, red=red, conf=conf, theil=theil,cn=cn,...))
             cat("\n===================================\n")
             print(imcdiag(x,y,method,corr=TRUE,vif=vif,tol=tol, conf=conf,cvif=cvif,
-                          leamer=leamer))
+                          leamer=leamer, all=all))
         }
     }
     else{
@@ -51,8 +51,8 @@ mctest<-function(x, y, type=c("o","i","b"), na.rm = TRUE, Inter=TRUE, method=NUL
             warning("\n\nInter argument is required for omcdiag function\n")
         if (corr==FALSE || is.null(corr))
            (imcdiag(x, y, method,corr=FALSE,vif=vif,tol=tol, conf=conf,cvif=cvif,
-                    leamer=leamer) )
-        else (imcdiag(x, y, method,corr=TRUE,vif=vif,tol=tol, conf=conf,cvif=cvif,
-                    leamer=leamer) )
+                    leamer=leamer, all=all) )
+        else (imcdiag(x, y, method, corr=TRUE,vif=vif,tol=tol, conf=conf,cvif=cvif,
+                    leamer=leamer, all=all) )
     }
 }

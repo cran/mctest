@@ -1,14 +1,16 @@
 Package: mctest
 Type: Package
 Title: Multicollinearity Diagnostic Measures
-Version: 1.1
-Author: Muhammad Imdadullah and Dr. Muhammad Aslam
-Maintainer: Muhammad Imdadullah <mimdadasad@gmail.com>
+Version: 1.1.1
+Author: Muhammad Imdad Ullah and Dr. Muhammad Aslam
+Maintainer: Muhammad Imdad Ullah <mimdadasad@gmail.com>
 Description: Package computes popular and widely used multicollinearity diagnostic measures. Package also indicates which regressors may be the reason of collinearity among regressors.
 License: GPL (>= 2)
 LazyData: TRUE
 BugReports: http://rfaqs.com/contact
 NeedsCompilation: no
-Packaged: 2016-12-05 17:13:25 UTC; Muhammad
+Packaged: 2017-10-28 06:46:35 UTC; Muhammad
 Repository: CRAN
-Date/Publication: 2016-12-05 21:36:43
+Note: Department of Statistics, Bahauddin Zakariya University, Multan,
+        Pakistan.
+Date/Publication: 2017-10-28 13:57:59 UTC

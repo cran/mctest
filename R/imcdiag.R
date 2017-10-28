@@ -89,13 +89,31 @@ imcdiag<-function(x, y, method=NULL, na.rm=TRUE, corr=FALSE, vif=10, tol=0.1,
                 R2>R2yonallx
                 )
 
-  colnames(alldiag)<-cbind("VIF", "TOL", "Wi", "Fi", "Leamer", "CVIF", "Klein")
+  colnames(alldiag)<-cbind("VIF",
+                           "TOL",
+                           "Wi",
+                           "Fi",
+                           "Leamer",
+                           "CVIF",
+                           "Klein")
   rownames(alldiag)<-colnames(x)
 
   if(is.null(method)){
-    idiags<-list(VIF=VIF, TOL=TOL, Wi=Wi, Fi=Fi, Leamer=Leamer, CVIF=CVIF, Klein=R2>R2yonallx)
+    idiags<-list(VIF=VIF,
+                 TOL=TOL,
+                 Wi=Wi,
+                 Fi=Fi,
+                 Leamer=Leamer,
+                 CVIF=CVIF,
+                 Klein=R2>R2yonallx)
     idiags<-do.call(cbind,idiags)
-    colnames(idiags)<-cbind("VIF", "TOL", "Wi", "Fi", "Leamer", "CVIF", "Klein")
+    colnames(idiags)<-cbind("VIF",
+                            "TOL",
+                            "Wi",
+                            "Fi",
+                            "Leamer",
+                            "CVIF",
+                            "Klein")
     rownames(idiags)<-colnames(x)
   }else  {
     idiags<-switch(method,
@@ -114,12 +132,23 @@ imcdiag<-function(x, y, method=NULL, na.rm=TRUE, corr=FALSE, vif=10, tol=0.1,
     colnames(idiags)<-c(method, "detection")
     rownames(idiags)<-colnames(x)
   } else if (ncol(idiags)==4){
-    colnames(idiags)<-c("R2j", "R2(overall)", "Difference", "detection")
+    colnames(idiags)<-c("R2j",
+                        "R2(overall)",
+                        "Difference",
+                        "detection")
     rownames(idiags)<-colnames(x)
   }
 
-  ires<-list(idiags=idiags, x=x, y=y, method=method, corr=corr, call=cl, pval=pval,
-             R2=R2yonallx, all=all, alldiag=alldiag)
+  ires<-list(idiags=idiags,
+             x=x,
+             y=y,
+             method=method,
+             corr=corr,
+             call=cl,
+             pval=pval,
+             R2=R2yonallx,
+             all=all,
+             alldiag=alldiag)
 
   class(ires)<-"imc"
   ires
@@ -157,17 +186,17 @@ print.imc<-function(x, digits = max(3, getOption("digits") - 3), ...){
 
   if(!is.null(method) && ncol(res)==2 && sum(res[,2]!=0) ){
     cat("\nMulticollinearity may be due to", colnames(x$x) [which(res[,2] %in% TRUE)],"regressors\n")
-    cat("\n1 --> COLLINEARITY is detected \n0 --> COLLINEARITY in not detected by the test\n\n")
+    cat("\n1 --> COLLINEARITY is detected by the test \n0 --> COLLINEARITY is not detected by the test\n\n")
     cat("===================================\n")
   } else if (!is.null(method) && ncol(res)==4 && sum(res[,4]!=0)){
     cat("\nMulticollinearity may be due to", colnames(x$x) [which(res[,4] %in% TRUE)],"regressors\n\n")
-    cat("\n1 --> COLLINEARITY is detected \n0 --> COLLINEARITY in not detected by the test\n\n")
+    cat("\n1 --> COLLINEARITY is detected by the test \n0 --> COLLINEARITY is not detected by the test\n\n")
     cat("===================================\n")
   } else if (!is.null(method) ){
     cat("\nNOTE: ", method, "Method Failed to detect multicollinearity\n\n")
-    cat("\n0 --> COLLINEARITY in not detected by the test\n\n")
+    cat("\n0 --> COLLINEARITY is not detected by the test\n\n")
     cat("===================================\n")
-  } else {cat("\n1 --> COLLINEARITY is detected \n0 --> COLLINEARITY in not detected by the test\n\n")
+  } else {cat("\n1 --> COLLINEARITY is detected by the test \n0 --> COLLINEARITY is not detected by the test\n\n")
     #cat(x$pval, ", have non-significant t-ratios\n")
     if(!length(x$pval)){
       cat("* all coefficients have significant t-ratios\n")

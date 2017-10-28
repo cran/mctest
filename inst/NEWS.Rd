@@ -1,6 +1,14 @@
 \name{NEWS}
 \title{News for Package 'mctest'}
 
+\section{Changes in mectest version 1.11 (2017-10-28)}{
+  \itemize{
+  \item {References are updated.}
+  \item {In \code{omcdiag()} and \code{imcdiag()} output, "COLLINEARITY in not detected by the test" is replaced by "COLLINEARITY is not detected by the test"}
+  \item {In \code{omcdiag} output, "Condition Indeces" is updated to "Condition Indices"}
+}
+}
+
 \section{Changes in mctest version 1.1 (2016-12-05)}{
   \subsection{Addition}{
     \itemize{

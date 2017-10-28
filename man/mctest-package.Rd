@@ -13,6 +13,6 @@ This package contains functions for computing overall and individual multicollin
 For a complete list of functions, use \code{library(help="mctest")}.
 }
 
-\author{Muhammad Imdadullah, Dr. Muhammad Aslam}
+\author{Muhammad Imdad Ullah, Dr. Muhammad Aslam}
 
 \keyword{ package }

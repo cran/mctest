@@ -4,7 +4,7 @@
 %\alias{print.imc}
 \title{Individual multicollinearity diagnostic measures}
 \description{
-Computes different measures of multicollinearity diagnostics for each regressor in the design matrix \eqn{X}{X}. Individual measures includes variance Inflation factor (VIF), Farrar F-test for determination of multicollinearity, Auxiliary F-test for relationship between F and R-square, Leamer's method, Corrected VIF (CVIF), and Klein's rule.
+Computes different measures of multicollinearity diagnostics for each regressor in the design matrix \eqn{X}{X}. Individual measures includes variance Inflation factor (VIF) (Marquardt, 1970), Farrar F-test for determination of multicollinearity (Farrar and Glauber, 1967), Auxiliary F-test for relationship between F and R-square(Gujarati and Porter, 2008), Leamer's method (Greene, 2002), Corrected VIF (CVIF) (Curto and Pinto, 2011), and Klein's rule (Klein, 1962).
 
 }
 \usage{
@@ -44,22 +44,22 @@ This function detects the existence of multicollinearity by using different avai
 }
 
 \references{
-Belsely, D.A., \emph{A Guide to Using the Collinearity Diagnostics}. Computer science in Economics and Management, 1991. \bold{4(1)}: 33--50.
+Belsely, D. A. A Guide to Using the Collinearity Diagnostics. \emph{Computer Science in Economics and Management}, \bold{4(1)}: 33--50, 1991.
 
-Chatterjee, S. and A. Hadi, \emph{Regression Analysis by Example}. 4 ed. 2006, Hoboken, New York; John Wiley and Sons Inc.
+Belsley, D. A., Kuh, E., and Welsch, R. E. \emph{Regression Diagnostics: Identifying Influential Data and Sources of Collinearity}. John Wiley \& Sons, New York, 1980.
 
-Belsley, David. A., Edwin. Kuh, and Roy. E. Welsch. 1980. \emph{Regression Diagnostics: Identifying Influential Data and Sources of Collinearity}. New York: John Wiley and Sons.
+Chatterjee, S. and Hadi, A. S. \emph{Regression Analysis by Example}. John Wiley \& Sons, 4th edition, New York, 2006.
 
-Greene, William H. 2000. \emph{Econometric Analysis}. 4th Ed. Upper Saddle River, NJ: Prentice--Hall.
+Greene, W. H. \emph{Econometric Analysis}. Prentice--Hall, Upper Saddle River, New Jersey, 4th edition, 2000.
 
-Imdadullah, M.  \emph{Addressing Linear Regression Models with Correlated Regressors: Some Package Development in R}, Submitted Ph.D thesis, Department of Statistics, Bahauddin Zakariya University, Multan, Pakistan.
+Imdad, M. U. \emph{Addressing Linear Regression Models with Correlated Regressors: Some Package Development in R} (Doctoral Thesis, Department of Statistics, Bahauddin Zakariya University, Multan, Pakistan), 2017.
 
+Imdadullah, M., Aslam, M., and Altaf, S. mctest: An R Package for Detection of Collinearity Among Regressors. \emph{The R Journal}, \bold{8(2)}:499--509, 2016.
 }
-\author{Muhammad Imdadullah, Dr. Muhammad Aslam}
-\note{
-Missing values in data will be removed by default. There is no method for the detection of multicollinearity, if missing values exists in the data set}
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
+\author{Muhammad Imdad Ullah, Dr. Muhammad Aslam}
+
+\note{Missing values in data will be removed by default. There is no method for the detection of multicollinearity, if missing values exists in the data set.}
 
 \seealso{\code{\link{omcdiag}} }
 \examples{

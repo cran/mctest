@@ -5,7 +5,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Overall multicollinearity diagnostics measures}
 \description{
-Computes different overall measures of multicollinearity diagnostics for matrix of regressors. Overall measures of collinearity detection includes Determinant of the correlation matrix, Farrar test of chi-square for presence of multicollinearity, Red Indicator, Sum of lambda inverse values, Theil's indicator and condition number with or without intercept term.
+Computes different overall measures of multicollinearity diagnostics for matrix of regressors. Overall measures of collinearity detection includes Determinant of the correlation matrix (Cooley and Lohnes, 1971), Farrar test of chi-square for presence of multicollinearity (Garrar and Glauber, 1967), Red Indicator (Kovacs et al., 2015), Sum of lambda inverse (Chatterjee and Price, 1977) values, Theil's indicator (Theil, 1971) and condition number (Belsley et al., 1980) with or without intercept term.
 }
 
 \usage{omcdiag(x, y, na.rm = TRUE, Inter = TRUE, detr=0.01, red=0.5,
@@ -37,19 +37,22 @@ Function also displays diagnostic measures value with the decision of either mul
   \item{call}{The matched call.}
 }
 \references{
-Belsely, D.A., \emph{A Guide to Using the Collinearity Diagnostics}. Computer science in Economics and Management, 1991. \bold{4(1)}: 33--50.
+Belsely, D. A. A Guide to Using the Collinearity Diagnostics. \emph{Computer Science in Economics and Management}, \bold{4(1)}: 33--50, 1991.
 
-Chatterjee, S. and A. Hadi, \emph{Regression Analysis by Example}. 4 ed. 2006, Hoboken, New York; John Wiley and Sons Inc.
+Belsley, D. A., Kuh, E., and Welsch, R. E. \emph{Regression Diagnostics: Identifying Influential Data and Sources of Collinearity}. John Wiley \& Sons, New York, 1980.
 
-Belsley, David. A., Edwin. Kuh, and Roy. E. Welsch. 1980. \emph{Regression Diagnostics: Identifying Influential Data and Sources of Collinearity}. New York: John Wiley and Sons.
+Chatterjee, S. and Hadi, A. S. \emph{Regression Analysis by Example}. John Wiley \& Sons, 4th edition, New York, 2006.
 
-Greene, William H. 2000. \emph{Econometric Analysis}. 4th Ed. Upper Saddle River, NJ: Prentice--Hall.
+Greene, W. H. \emph{Econometric Analysis}. Prentice--Hall, Upper Saddle River, New Jersey, 4th edition, 2000.
 
-Imdadullah, M.  \emph{Addressing Linear Regression Models with Correlated Regressors: Some Package Development in R}, Submitted Ph.D thesis, Department of Statistics, Bahauddin Zakariya University, Multan, Pakistan
+Imdad, M. U. \emph{Addressing Linear Regression Models with Correlated Regressors: Some Package Development in R} (Doctoral Thesis, Department of Statistics, Bahauddin Zakariya University, Multan, Pakistan), 2017.
+
+Imdadullah, M., Aslam, M., and Altaf, S. mctest: An R Package for Detection of Collinearity Among Regressors. \emph{The R Journal}, \bold{8(2)}:499--509, 2016.
 }
-\author{Muhammad Imdadullah, Dr. Muhammad Aslam}
-\note{
-Missing values in data will be removed by default. There is no method for the detection of multicollinearity, if missing values exists in the data set.}
+
+\author{Muhammad Imdad Ullah, Dr. Muhammad Aslam}
+
+\note{Missing values in data will be removed by default. There is no method for the detection of multicollinearity, if missing values exists in the data set.}
 
 \seealso{
 Individual collinearity diagnostic measure  \code{\link{imcdiag}}

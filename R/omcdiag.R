@@ -82,11 +82,20 @@ omcdiag<-function(x, y, na.rm=TRUE, Inter=TRUE, detr=0.01, red=0.5,
   CN<-sqrt(max(Eigval)/min(Eigval))
   CN<-cbind(CN,CN>cn)
 
-  odiags<-list(Det=Det1, Fchi=Fchi, Red=Red, slambda=slambda, Theil=Theil, CN=CN)
+  odiags<-list(Det=Det1,
+               Fchi=Fchi,
+               Red=Red,
+               slambda=slambda,
+               Theil=Theil,
+               CN=CN)
   odiags<-  do.call(rbind,odiags)
   colnames(odiags)<-c("results", "detection")
-  rownames(odiags)<-c("Determinant", "Farrar Chi-Square", "Red Indicator",
-                      "sum of Lambda Invers", "Theil Indicator", "Condition Number")
+  rownames(odiags)<-c("Determinant",
+                      "Farrar Chi-Square",
+                      "Red Indicator",
+                      "sum of Lambda Invers",
+                      "Theil Indicator",
+                      "Condition Number")
   ores<-list(odiags=odiags,
            #  nvar=nvar,
              Eigval=Eigval,
@@ -105,7 +114,7 @@ print.omc<-function(x,digits=max(3,getOption("digits")-3),...){
 #  nvar=ncol(x$x)
 
   EigCI<-rbind(x$Eigval, sqrt(max(x$Eigval)/x$Eigval))
-  rownames(EigCI)<-c("Eigenvalues:", "Condition Indeces:")
+  rownames(EigCI)<-c("Eigenvalues:", "Condition Indices:")
 
   omc<-round(x$odiags[,1],digits)
   omd<-x$odiags[,2]
@@ -119,7 +128,7 @@ print.omc<-function(x,digits=max(3,getOption("digits")-3),...){
   colnames(res)<-c("MC Results", "detection")
 
   print(res)
-  cat("\n1 --> COLLINEARITY is detected \n0 --> COLLINEARITY in not detected by the test\n\n")
+  cat("\n1 --> COLLINEARITY is detected by the test \n0 --> COLLINEARITY is not detected by the test\n\n")
   cat("===================================\n")
 
   if(x$Inter){

@@ -1,9 +1,6 @@
 # functions
 export(mctest, imcdiag, omcdiag, mc.plot)
 
-# functions not exported
-# export(computeLogisticRidge, objectiveFunction, updateBeta)
-
 # S3 methods
 S3method(print, imc)
 S3method(print, omc)
@@ -12,6 +9,4 @@ importFrom("graphics", "abline", "axis", "mtext", "par", "plot","text")
 
 importFrom("stats", "complete.cases", "lm", "qchisq", "qf", "sd")
 
-## Load the shared object library
-#useDynLib(ridge)
 

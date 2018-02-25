@@ -1,5 +1,6 @@
-imcdiag<-function(x, y, method=NULL, na.rm=TRUE, corr=FALSE, vif=10, tol=0.1,
-                  conf=0.95,cvif=10, leamer=0.1, all=FALSE,...){
+imcdiag<-function(x, y, method = NULL, na.rm = TRUE, corr = FALSE,
+                  vif = 10, tol = 0.1, conf = 0.95,
+                  cvif = 10, leamer = 0.1, all = FALSE, ...){
 
   x<-as.matrix(x)
   y<-as.matrix(y)
@@ -217,7 +218,8 @@ print.imc<-function(x, digits = max(3, getOption("digits") - 3), ...){
 
     print(corR)
     cat("\n====================NOTE===================\n")
-    cat(sprintf("\n%s and %s may be collinear as |%f|>=0.7", colnames(corR)[row(corR)[ix]],
+    cat(sprintf("\n%s and %s may be collinear as |%f|>=0.7",
+                colnames(corR)[row(corR)[ix]],
                 colnames(corR)[col(corR)[ix] ], corR[ix] ),"\n\n")
   }
 

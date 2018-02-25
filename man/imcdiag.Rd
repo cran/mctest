@@ -2,14 +2,14 @@
 \alias{imcdiag}
 %\alias{print.omc}
 %\alias{print.imc}
-\title{Individual multicollinearity diagnostic measures}
+\title{Individual Multicollinearity Diagnostic Measures}
 \description{
-Computes different measures of multicollinearity diagnostics for each regressor in the design matrix \eqn{X}{X}. Individual measures includes variance Inflation factor (VIF) (Marquardt, 1970), Farrar F-test for determination of multicollinearity (Farrar and Glauber, 1967), Auxiliary F-test for relationship between F and R-square(Gujarati and Porter, 2008), Leamer's method (Greene, 2002), Corrected VIF (CVIF) (Curto and Pinto, 2011), and Klein's rule (Klein, 1962).
+Computes different measures of multicollinearity diagnostics for each regressor in the design matrix \eqn{X}{X}. Individual measures includes variance Inflation factor (VIF) (Marquardt, 1970), Farrar F-test for determination of multicollinearity (Farrar and Glauber, 1967), Auxiliary F-test for relationship between F and R-square(Gujarati and Porter, 2008), Leamer's method (Greene, 2002), Corrected VIF (CVIF) (Curto and Pinto, 2011 <doi: 10.1080/02664763.2010.505956>), and Klein's rule (Klein, 1962).
 
 }
 \usage{
-imcdiag(x, y, method = NULL, na.rm = TRUE, corr = FALSE, vif=10, tol=0.1,
-              conf=0.95, cvif=10, leamer=0.1, all=FALSE, ...)
+imcdiag(x, y, method = NULL, na.rm = TRUE, corr = FALSE, vif = 10, tol = 0.1,
+              conf = 0.95, cvif = 10, leamer = 0.1, all = FALSE, ...)
 }
 \arguments{
   \item{x }{A numeric design matrix and should contain more than one regressor.}
@@ -50,14 +50,16 @@ Belsley, D. A., Kuh, E., and Welsch, R. E. \emph{Regression Diagnostics: Identif
 
 Chatterjee, S. and Hadi, A. S. \emph{Regression Analysis by Example}. John Wiley \& Sons, 4th edition, New York, 2006.
 
+Curto, J. D. and Pinto, J. C. The Corrected VIF (CVIF). \emph{Journal of Applied Statistics}, \bold{38}(7), 1499--1507.
+
 Greene, W. H. \emph{Econometric Analysis}. Prentice--Hall, Upper Saddle River, New Jersey, 4th edition, 2000.
 
 Imdad, M. U. \emph{Addressing Linear Regression Models with Correlated Regressors: Some Package Development in R} (Doctoral Thesis, Department of Statistics, Bahauddin Zakariya University, Multan, Pakistan), 2017.
 
-Imdadullah, M., Aslam, M., and Altaf, S. mctest: An R Package for Detection of Collinearity Among Regressors. \emph{The R Journal}, \bold{8(2)}:499--509, 2016.
+Imdadullah, M., Aslam, M., and Altaf, S. mctest: An R Package for Detection of Collinearity Among Regressors. \emph{The R Journal}, \bold{8}(2):499--509, 2016.
 }
 
-\author{Muhammad Imdad Ullah, Dr. Muhammad Aslam}
+\author{Dr. Muhammad Imdad Ullah, Dr. Muhammad Aslam}
 
 \note{Missing values in data will be removed by default. There is no method for the detection of multicollinearity, if missing values exists in the data set.}
 

@@ -1,11 +1,18 @@
 \name{NEWS}
 \title{News for Package 'mctest'}
+\section{Changes in mctest version 1.2 (2018-02-24)}{
+\itemize{
+\item {A function \code{eigprop()} is added that computes the eigenvalues, condition indices and variance decomposition proportion collinearity diagnostic procedures found in Belsley, Kuh, and Welsch (1980).}
+\item {References are updated and doi are added.}
+\item {The x-axis label is removed to avoid the confusion of relating regressors with eigenvalues dimensions.}
+}
+}
 
-\section{Changes in mectest version 1.11 (2017-10-28)}{
+\section{Changes in mctest version 1.11 (2017-10-28)}{
   \itemize{
   \item {References are updated.}
   \item {In \code{omcdiag()} and \code{imcdiag()} output, "COLLINEARITY in not detected by the test" is replaced by "COLLINEARITY is not detected by the test"}
-  \item {In \code{omcdiag} output, "Condition Indeces" is updated to "Condition Indices"}
+  \item {In \code{omcdiag} output, "Condition Indices" is updated to "Condition Indices"}
 }
 }
 

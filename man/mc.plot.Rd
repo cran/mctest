@@ -4,7 +4,7 @@
 \description{
 Plot of VIF and Eigenvalues for detection of multicollinearity among regressors. The VIF and Eigenvalues are also displayed on graph. Eigenvalues plot can be displayed with or without inclusion of intercept term.
 }
-\usage{mc.plot(x,y, Inter = FALSE, vif = 10, ev = 0.01, ...)}
+\usage{mc.plot(x, y, Inter = FALSE, vif = 10, ev = 0.01, ...)}
 \arguments{
   \item{x}{A numeric design matrix and should contain more than one regressor.}
   \item{y}{A numeric vector of response variable.}
@@ -16,7 +16,7 @@ Plot of VIF and Eigenvalues for detection of multicollinearity among regressors.
 \details{
 \code{mc.plot} function draw graphs of VIF and Eigenvalues for graphical detection of collinearity among regression. Horizontal line for VIF and Eigenvalues is drawn as indication of threshold values of both VIF and Eigenvalues for testing the multicollinearity.
 }
-\value{Don't return any thing, it displays plot}
+\value{Don't return any thing, it displays plot.}
 
 \references{
 Belsely, D. A. A Guide to Using the Collinearity Diagnostics. \emph{Computer Science in Economics and Management}, \bold{4(1)}: 33--50, 1991.
@@ -32,9 +32,7 @@ Imdad, M. U. \emph{Addressing Linear Regression Models with Correlated Regressor
 Imdadullah, M., Aslam, M., and Altaf, S. mctest: An R Package for Detection of Collinearity Among Regressors. \emph{The R Journal}, \bold{8(2)}:499--509, 2016.
 }
 
-\author{
-Muhammad Imdad Ullah, Dr. Muhammad Aslam
-}
+\author{Dr. Muhammad Imdad Ullah, Dr. Muhammad Aslam}
 
 \seealso{Overall collinearity diagnostic measures \code{\link{omcdiag}, Individual collinearity diagnostic measures \link{imcdiag}}}
 
@@ -48,13 +46,13 @@ y<-Hald[,1]
 mc.plot(x, y)
 
 ## plot with default threshold of VIF and Eigenvalues with intercept
-mc.plot(x, y, Inter=TRUE)
+mc.plot(x, y, Inter = TRUE)
 
 ## plot with specific threshold of VIF and Eigenvalues with no intercept
-mc.plot(x, y, vif=5, ev=20)
+mc.plot(x, y, vif = 5, ev = 20)
 
 ## plot with specific threshold of VIF and Eigenvalues with intercept
-mc.plot(x, y, vif=5, ev=20, Inter=TRUE)
+mc.plot(x, y, vif = 5, ev = 20, Inter = TRUE)
 }
 \keyword{VIF }
 \keyword{Eigenvalues}

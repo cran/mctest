@@ -1,9 +1,10 @@
 # functions
-export(mctest, imcdiag, omcdiag, mc.plot)
+export(mctest, imcdiag, omcdiag, mc.plot, eigprop)
 
 # S3 methods
 S3method(print, imc)
 S3method(print, omc)
+S3method(print, eigp)
 
 importFrom("graphics", "abline", "axis", "mtext", "par", "plot","text")
 

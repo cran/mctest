@@ -1,5 +1,5 @@
-omcdiag<-function(x, y, na.rm=TRUE, Inter=TRUE, detr=0.01, red=0.5,
-                  conf=0.95, theil=0.5,cn=30,...){
+omcdiag<-function(x, y, na.rm = TRUE, Inter = TRUE, detr = 0.01, red = 0.5,
+                  conf = 0.95, theil = 0.5,cn = 30,...){
   cl<-match.call()
 
   x<-as.matrix(x)
@@ -69,17 +69,19 @@ omcdiag<-function(x, y, na.rm=TRUE, Inter=TRUE, detr=0.01, red=0.5,
   Theil<-cbind(Theil, Theil>theil)
   #R2yonallx<-summary(lm(y~x))$r.squared
 
-  if(Inter==T){
-    ex<-cbind(1,x)
-  }else {
-    ex<-x
-    colnames(ex)<-names(x)
-  }
+#  if(Inter==T){
+#    ex<-cbind(1,x)
+#    colnames(ex)<-c("Intercept", colnames(x))
+#  }else {
+#    ex<-x
+#    colnames(ex)<-colnames(x)
+#  }
 
-  xz<-apply(ex,2,function(ex){ex/sqrt(sum(ex^2))})
-  Eigval<-eigen(t(xz)%*%xz)$values
+#  xz<-apply(ex,2,function(ex){ex/sqrt(sum(ex^2))})
+#  Eigval<-eigen(t(xz)%*%xz)$values
 #  P<- eigen(t(xz)%*%xz)$vectors
-  CN<-sqrt(max(Eigval)/min(Eigval))
+CN<-max(eigprop(x, Inter = Inter)$ci)
+#  CN<-sqrt(max(Eigval)/min(Eigval))
   CN<-cbind(CN,CN>cn)
 
   odiags<-list(Det=Det1,
@@ -88,19 +90,25 @@ omcdiag<-function(x, y, na.rm=TRUE, Inter=TRUE, detr=0.01, red=0.5,
                slambda=slambda,
                Theil=Theil,
                CN=CN)
-  odiags<-  do.call(rbind,odiags)
+  odiags<-  do.call(rbind, odiags)
+
   colnames(odiags)<-c("results", "detection")
+
   rownames(odiags)<-c("Determinant",
                       "Farrar Chi-Square",
                       "Red Indicator",
                       "sum of Lambda Invers",
                       "Theil Indicator",
                       "Condition Number")
+
   ores<-list(odiags=odiags,
            #  nvar=nvar,
-             Eigval=Eigval,
+           # Eigval=Eigval,
              Inter=Inter,
-             x=x, calll=cl)
+             x=x,
+             calll=cl
+           # xz=xz
+           )
 
   ores<-c(ores)
   class(ores)<-"omc"
@@ -111,10 +119,6 @@ print.omc<-function(x,digits=max(3,getOption("digits")-3),...){
   cat("\nCall:\n", paste(deparse(x$call), sep = "\n", collapse = "\n"),
       "\n\n", sep = "")
   cat("\nOverall Multicollinearity Diagnostics\n\n")
-#  nvar=ncol(x$x)
-
-  EigCI<-rbind(x$Eigval, sqrt(max(x$Eigval)/x$Eigval))
-  rownames(EigCI)<-c("Eigenvalues:", "Condition Indices:")
 
   omc<-round(x$odiags[,1],digits)
   omd<-x$odiags[,2]
@@ -129,16 +133,5 @@ print.omc<-function(x,digits=max(3,getOption("digits")-3),...){
 
   print(res)
   cat("\n1 --> COLLINEARITY is detected by the test \n0 --> COLLINEARITY is not detected by the test\n\n")
-  cat("===================================\n")
-
-  if(x$Inter){
-    cat("Eigvenvalues with INTERCEPT\n")
-    colnames(EigCI)<-c("Intercept", colnames(x$x))
-    print(round(EigCI,digits))
-  }else{
-    cat("Eigenvalues without INTERCEPT\n\n")
-    colnames(EigCI)<-colnames(x$x)
-    print(round(EigCI, digits))
-  }
   invisible(res)
 }

@@ -1,0 +1,39 @@
+year <- sub("-.*", "", meta$Date)
+note <- sprintf("R package version %s", meta$Version)
+
+citHeader("Please cite both the mctest related paper and the mctest package:")
+
+citEntry(entry="Manual",
+    title = "{mctest}: Multicollinearity Diagnostic Measures",
+    author = personList(as.person("M. U. Imdad"),
+                        as.person("M. Aslam")),
+    year = year,
+    note = note,
+    url = "https://CRAN.R-project.org/package=mctest",
+
+
+    textVersion =
+         paste("Imdad, M. U. & Aslam, M. (2018). ",
+               "mctest: Multicollinearity Diagnostic Measures. ",
+               "URL https://CRAN.R-project.org/package=mctest, ", note)
+)
+
+
+citHeader("To cite mctest article in publications use:")
+
+citEntry(entry = "Article",
+  title  = "mctest: An R Package for Deteection of Collinearity among Regressors",
+  author = personList(as.person("M. Imdadullah"),
+                      as.person("M. Aslam")),
+  journal= "The R Journal",
+  year         = "2016",
+  volume       = "8(2)",
+  pages         = "499-509",
+  url          = "https://journal.r-project.org/archive/2016/RJ-2016-062/index.html",
+
+  textVersion  =
+  paste("Imdadullah, M., Aslam, M., and Altaf, S., (2016). ",
+        "mctest: An R Package for Deteection of Collinearity among Regressors. ",
+        "The R Journal, ", "8(2),", "499--509",
+        "https://journal.r-project.org/archive/2016/RJ-2016-062/index.html")
+)

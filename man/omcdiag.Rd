@@ -1,15 +1,14 @@
 \name{omcdiag}
 \alias{omcdiag}
-%\alias{print.omc}
-%\alias{print.imc}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{Overall multicollinearity diagnostics measures}
+
+\title{Overall Multicollinearity Diagnostics Measures}
+
 \description{
-Computes different overall measures of multicollinearity diagnostics for matrix of regressors. Overall measures of collinearity detection includes Determinant of the correlation matrix (Cooley and Lohnes, 1971), Farrar test of chi-square for presence of multicollinearity (Garrar and Glauber, 1967), Red Indicator (Kovacs et al., 2015), Sum of lambda inverse (Chatterjee and Price, 1977) values, Theil's indicator (Theil, 1971) and condition number (Belsley et al., 1980) with or without intercept term.
+Computes different overall measures of multicollinearity diagnostics for matrix of regressors. Overall measures of collinearity detection includes Determinant of the correlation matrix (Cooley and Lohnes, 1971), Farrar test of chi-square for presence of multicollinearity (Farrar and Glauber, 1967), Red Indicator (Kovacs et al., 2015 <doi: 10.1111/j.1751-5823.2005.tb00156.x>), Sum of lambda inverse (Chatterjee and Price, 1977) values, Theil's indicator (Theil, 1971) and condition number (Belsley et al., 1980 <doi: 10.1007/BF00426854>) with or without intercept term.
 }
 
-\usage{omcdiag(x, y, na.rm = TRUE, Inter = TRUE, detr=0.01, red=0.5,
-                     conf=0.95, theil=0.5, cn=30,...) }
+\usage{omcdiag(x, y, na.rm = TRUE, Inter = TRUE, detr = 0.01, red = 0.5,
+                     conf = 0.95, theil = 0.5, cn = 30,...) }
 
 \arguments{
   \item{x}{A numeric design matrix and should contain more than one regressor.}
@@ -31,9 +30,8 @@ Function also displays diagnostic measures value with the decision of either mul
 }
 \value{
   \item{odiags}{Listing of all overall diagnostic measures.}
-  \item{Inter}{logical, if \code{TRUE} (the default value) a eigenvalues are returned with intercept term included.}
+  \item{Inter}{logical, if \code{TRUE} (the default value) condition number is returned with intercept term included.}
   \item{x}{matrix of regressors.}
-  \item{Eigval}{Eigenvalues for each regressor.}
   \item{call}{The matched call.}
 }
 \references{
@@ -48,15 +46,17 @@ Greene, W. H. \emph{Econometric Analysis}. Prentice--Hall, Upper Saddle River, N
 Imdad, M. U. \emph{Addressing Linear Regression Models with Correlated Regressors: Some Package Development in R} (Doctoral Thesis, Department of Statistics, Bahauddin Zakariya University, Multan, Pakistan), 2017.
 
 Imdadullah, M., Aslam, M., and Altaf, S. mctest: An R Package for Detection of Collinearity Among Regressors. \emph{The R Journal}, \bold{8(2)}:499--509, 2016.
+
+Kovacs, P., Petres, T., and Toth, L. A New Measure of Multicollinearity in Linear Regression Models. \emph{International Statistical Review / Revue Internationale de Statistique}, \bold{73}(3): 405--412, 2005.
 }
 
-\author{Muhammad Imdad Ullah, Dr. Muhammad Aslam}
+\author{Dr. Muhammad Imdad Ullah, Dr. Muhammad Aslam}
 
 \note{Missing values in data will be removed by default. There is no method for the detection of multicollinearity, if missing values exists in the data set.}
 
 \seealso{
-Individual collinearity diagnostic measure  \code{\link{imcdiag}}
-}
+Individual collinearity diagnostic measure  \code{\link{imcdiag}}, Eigenvalues and variance decomposition proportion \code{\link{eigprop}} }
+
 
 \examples{
 ## Hald Cement data

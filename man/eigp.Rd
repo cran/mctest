@@ -1,9 +1,10 @@
 \name{eigprop}
 \alias{eigprop}
+\alias{print.eigp}
 \title{Eigenvalues and Variance Decomposition Proportion}
 
 \description{
-Computes eigenvalues, condition indices and variance decomposition proportions of \eqn{X'X}{X'X} or its related correlation matrix \eqn{R}{R} (see Belsley et al. (1980)<doi: 10.1007/BF00426854> ; Belsley, 1991; Kendall, 1957 and Silvey , 1969).
+Computes eigenvalues, condition indices and variance decomposition proportions of \eqn{X'X}{X'X} or its related correlation matrix \eqn{R}{R} (see Belsley et al. (1980) <doi: 10.1007/BF00426854> ; Belsley, 1991; Kendall, 1957 and Silvey , 1969).
 }
 
 \usage{eigprop(x, na.rm = TRUE, Inter = TRUE, prop = 0.5, ...)}
@@ -38,7 +39,7 @@ Imdadullah, M., Aslam, M., and Altaf, S. mctest: An R Package for Detection of C
 
 Silvey, S. D. Multicollinearity and imprecise estimation. \emph{Journal of the Royal Statistical Society, Series B (Methodological)}, \bold{31(3)}:539--552, 1969.
 }
-\author{Dr. Muhammad Imdad Ullah, Dr. Muhammad Aslam}
+\author{Muhammad Imdad Ullah, Muhammad Aslam}
 
 \note{Missing values in data will be removed by default. There is no method for the detection of multicollinearity, if missing values exists in the data set.}
 

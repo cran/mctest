@@ -55,7 +55,7 @@ omcdiag<-function(x, y, na.rm = TRUE, Inter = TRUE, detr = 0.01, red = 0.5,
   Det<-det(R)        # Determinant of correlation matrix
   Det1<-cbind(Det, Det<detr)
 
-  Fchi<- -(nrow(x)-1-(1/nvar) * (2*nvar + 5) ) * log(Det)
+  Fchi<- -(nrow(x)-1-(1/6) * (2*nvar + 5) ) * log(Det)
   Fchi<-cbind(Fchi, Fchi>qchisq(conf,1/2*(nvar)*(nvar-1)))
 
   Red <- sqrt((sum((t(sx)%*%sx)^2)-nvar)/(nvar*(nvar-1)))

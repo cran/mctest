@@ -1,10 +1,10 @@
 \name{omcdiag}
 \alias{omcdiag}
-
+\alias{print.omc}
 \title{Overall Multicollinearity Diagnostics Measures}
 
 \description{
-Computes different overall measures of multicollinearity diagnostics for matrix of regressors. Overall measures of collinearity detection includes Determinant of the correlation matrix (Cooley and Lohnes, 1971), Farrar test of chi-square for presence of multicollinearity (Farrar and Glauber, 1967), Red Indicator (Kovacs et al., 2015 <doi: 10.1111/j.1751-5823.2005.tb00156.x>), Sum of lambda inverse (Chatterjee and Price, 1977) values, Theil's indicator (Theil, 1971) and condition number (Belsley et al., 1980 <doi: 10.1007/BF00426854>) with or without intercept term.
+Computes different overall measures of multicollinearity diagnostics for matrix of regressors. Overall measures of collinearity detection includes Determinant of the correlation matrix (Cooley and Lohnes, 1971), Farrar test of chi-square for presence of multicollinearity (Farrar and Glauber, 1967), Red Indicator (Kovacs et al., 2015) <doi: 10.1111/j.1751-5823.2005.tb00156.x>, Sum of lambda inverse Chatterjee and Price (1977) values, Theil's indicator (Theil, 1971) and condition number (Belsley et al., 1980) <doi: 10.1007/BF00426854> with or without intercept term.
 }
 
 \usage{omcdiag(x, y, na.rm = TRUE, Inter = TRUE, detr = 0.01, red = 0.5,
@@ -50,7 +50,7 @@ Imdadullah, M., Aslam, M., and Altaf, S. mctest: An R Package for Detection of C
 Kovacs, P., Petres, T., and Toth, L. A New Measure of Multicollinearity in Linear Regression Models. \emph{International Statistical Review / Revue Internationale de Statistique}, \bold{73}(3): 405--412, 2005.
 }
 
-\author{Dr. Muhammad Imdad Ullah, Dr. Muhammad Aslam}
+\author{Muhammad Imdad Ullah, Muhammad Aslam}
 
 \note{Missing values in data will be removed by default. There is no method for the detection of multicollinearity, if missing values exists in the data set.}
 

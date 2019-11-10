@@ -32,7 +32,7 @@ Imdad, M. U. \emph{Addressing Linear Regression Models with Correlated Regressor
 Imdadullah, M., Aslam, M., and Altaf, S. mctest: An R Package for Detection of Collinearity Among Regressors. \emph{The R Journal}, \bold{8(2)}:499--509, 2016.
 }
 
-\author{Dr. Muhammad Imdad Ullah, Dr. Muhammad Aslam}
+\author{Muhammad Imdad Ullah, Muhammad Aslam}
 
 \seealso{Overall collinearity diagnostic measures \code{\link{omcdiag}, Individual collinearity diagnostic measures \link{imcdiag}}}
 

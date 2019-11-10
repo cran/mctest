@@ -1,13 +1,13 @@
 imcdiag<-function(x, y, method = NULL, na.rm = TRUE, corr = FALSE,
-                  vif = 10, tol = 0.1, conf = 0.95,
-                  cvif = 10, leamer = 0.1, all = FALSE, ...){
+                  vif = 10, tol = 0.1, conf = 0.95, cvif = 10,
+                  ind1 = 0.02, ind2 = 0.7, leamer = 0.1, all = FALSE, ...){
 
   x<-as.matrix(x)
   y<-as.matrix(y)
 
   cl<-match.call()
 
-  #from lm.fit (extra argument handling)
+#from lm.fit (extra argument handling)
   if(length(list(...))>1L)
   {warning("Extra arguments ", paste(sQuote(names(list(...) ) ) , sep=", "),
            " are ignored", domain=NA)}
@@ -55,6 +55,12 @@ imcdiag<-function(x, y, method = NULL, na.rm = TRUE, corr = FALSE,
     R2yonx[i]<-summary(lm(y~x[,i]))$r.squared
   }
 
+  # researcher's diagnostic measure1
+  IND1<-(R2-AdjR2)
+
+  # researcher's diagnostic measure2
+  IND2<-R2/mean(R2)
+
   #pvalues of coefficients from OLS
   pval<-which(summary(lm(y~x))$coefficients[-1,4]>1-conf)
 
@@ -79,6 +85,26 @@ imcdiag<-function(x, y, method = NULL, na.rm = TRUE, corr = FALSE,
   #CVIF
   CVIF<-VIF* (1-R2yonallx)/(1-sum(R2yonx))
 
+  #IND1
+  if(n<100){
+    ind1<-ind1
+    IND1d<-IND1 < ind1
+  }
+  else {
+    ind1<-ind1/n*100
+    IND1d<- IND1 < ind1
+  }
+  #IND2
+  if(R2yonallx >= 0.7 & R2yonallx < 0.8){
+    IND2d <- abs(R2/mean(R2)-1) > R2yonallx
+  }
+  else if(R2yonallx >= 0.80){
+    IND2d<- IND2 > R2yonallx
+  }
+  else {
+    IND2d<-0
+  }
+
   idiags<-vector("list")
 
   alldiag<-cbind(VIF>=vif,
@@ -87,7 +113,9 @@ imcdiag<-function(x, y, method = NULL, na.rm = TRUE, corr = FALSE,
                 Fi>=qf(conf, n-2, n-nvar+1),
                 Leamer<=leamer,
                 CVIF>=cvif,
-                R2>R2yonallx
+                R2>R2yonallx,
+                IND1d,
+                IND2d
                 )
 
   colnames(alldiag)<-cbind("VIF",
@@ -96,7 +124,10 @@ imcdiag<-function(x, y, method = NULL, na.rm = TRUE, corr = FALSE,
                            "Fi",
                            "Leamer",
                            "CVIF",
-                           "Klein")
+                           "Klein",
+                           "IND1",
+                           "IND2"
+                           )
   rownames(alldiag)<-colnames(x)
 
   if(is.null(method)){
@@ -106,7 +137,11 @@ imcdiag<-function(x, y, method = NULL, na.rm = TRUE, corr = FALSE,
                  Fi=Fi,
                  Leamer=Leamer,
                  CVIF=CVIF,
-                 Klein=R2>R2yonallx)
+                 Klein=R2>R2yonallx,
+                 IND1=IND1,
+                 IND2=IND2
+                 )
+
     idiags<-do.call(cbind,idiags)
     colnames(idiags)<-cbind("VIF",
                             "TOL",
@@ -114,7 +149,10 @@ imcdiag<-function(x, y, method = NULL, na.rm = TRUE, corr = FALSE,
                             "Fi",
                             "Leamer",
                             "CVIF",
-                            "Klein")
+                            "Klein",
+                            "IND1",
+                            "IND2"
+                            )
     rownames(idiags)<-colnames(x)
   }else  {
     idiags<-switch(method,
@@ -125,6 +163,11 @@ imcdiag<-function(x, y, method = NULL, na.rm = TRUE, corr = FALSE,
                 Klein =cbind(R2,  R2yonallx, R2-R2yonallx, R2>R2yonallx),
                 Leamer=cbind(Leamer, Leamer<=leamer),
                 CVIF  =cbind(CVIF, CVIF>=cvif),
+                #IND1  =cbind(IND1, ifelse(n<100, IND1d, IND1d)),
+                IND1 = cbind(IND1, IND1d),
+                #IND2  =cbind(IND2, ifelse(R2yonallx<=ind2, abs(IND2-1)>R2yonallx, IND2>R2yonallx)),
+                #IND2  =cbind(IND2, ifelse(ind2 >= 0.7 & ind2 < 0.8, abs(IND2-1)>R2yonallx, IND2>R2yonallx)),
+                IND2= cbind(IND2, IND2d),
                 stop("\n\nThe argument of method should be VIF, TOL, Wi, CVIF, Klean, Leamer, or Fi\n\n")
     )
   }

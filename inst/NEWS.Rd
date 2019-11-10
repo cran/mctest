@@ -1,5 +1,13 @@
 \name{NEWS}
 \title{News for Package 'mctest'}
+\section{Changes in mctest version 1.25 (2019-11-09)}{
+\itemize{
+\item {A Correction in is made in Farrar and Glauber Chi-Square formula. }
+\item {Collinearity diagnostics \code{IND1} and \code{IND2} are added.}
+
+}
+}
+
 \section{Changes in mctest version 1.2 (2018-02-24)}{
 \itemize{
 \item {A function \code{eigprop()} is added that computes the eigenvalues, condition indices and variance decomposition proportion collinearity diagnostic procedures found in Belsley, Kuh, and Welsch (1980).}

@@ -1,7 +1,7 @@
 Package: mctest
 Type: Package
 Title: Multicollinearity Diagnostic Measures
-Version: 1.2.5
+Version: 1.3
 Authors@R: 
    c(person(given = "Imdad Ullah", 
             family = "Muhammad", 
@@ -22,10 +22,10 @@ BugReports: http://rfaqs.com/contact
 Note: Department of Statistics, Bahauddin Zakariya University, Multan,
         Pakistan.
 NeedsCompilation: no
-Packaged: 2019-11-10 17:14:55 UTC; imdad
+Packaged: 2020-05-21 08:46:35 UTC; imdad
 Author: Imdad Ullah Muhammad [aut, cre]
     (<https://orcid.org/0000-0002-1315-491X>),
   Aslam Muhammad [aut, ctb]
 Maintainer: Imdad Ullah Muhammad <mimdadasad@gmail.com>
 Repository: CRAN
-Date/Publication: 2019-11-10 22:30:02 UTC
+Date/Publication: 2020-05-21 09:00:02 UTC

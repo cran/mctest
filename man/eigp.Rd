@@ -7,10 +7,10 @@
 Computes eigenvalues, condition indices and variance decomposition proportions of \eqn{X'X}{X'X} or its related correlation matrix \eqn{R}{R} (see Belsley et al. (1980) <doi: 10.1007/BF00426854> ; Belsley, 1991; Kendall, 1957 and Silvey , 1969).
 }
 
-\usage{eigprop(x, na.rm = TRUE, Inter = TRUE, prop = 0.5, ...)}
+\usage{eigprop(mod, na.rm = TRUE, Inter = TRUE, prop = 0.5, ...)}
 
 \arguments{
-  \item{x }{A numeric design matrix and should contain more than one regressor.}
+  \item{mod }{A model object, not necessarily type \code{lm} }
   \item{na.rm }{Whether to remove missing observations.}
   \item{Inter}{Whether to include or exclude Intercept term, by default \code{Inter  =FALSE}.}
   \item{prop}{variance proportion default threshold, \code{prop=0.5}.}
@@ -48,25 +48,25 @@ Silvey, S. D. Multicollinearity and imprecise estimation. \emph{Journal of the R
 \examples{
 ## Hald Cement data
 data(Hald)
-x<-Hald[,-1]
+model <- lm(y~X1+X2+X3+X4, data = as.data.frame(Hald))
 
 # with Intercept term
-eigprop(x)
+eigprop(model)
 
 # without Intercept term
-eigprop(x, Inter = FALSE)
+eigprop(model, Inter = FALSE)
 
 # different proportion threshold
-eigprop(x, prop = 0.45)
+eigprop(model, prop = 0.45)
 
 # only variance proportions
-eigprop(x)$pi
+eigprop(model)$pi
 
 # only condition indices
-eigprop(x)$ci
+eigprop(model)$ci
 
 # only eigenvalues
-eigprop(x)$ev
+eigprop(model)$ev
 }
 \keyword{ eigenvalues }
 \keyword{ condition number }

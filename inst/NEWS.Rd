@@ -1,5 +1,14 @@
 \name{NEWS}
 \title{News for Package 'mctest'}
+\section{Changes in mctest version 1.3 (2020-05-20)}{
+\itemize{
+\item {Input argument \code{x} and \code{y} are deferred.}
+\item {A model object (\code{mod}), not necessarily type \code{lm} is taken as input argument in all of the functions \code{mctest()}, \code{imcdiag()}, \code{omcdiag()}, \code{eigprop()}, and \code{mc.plot()}.}
+\item {VIF and Eigen values reference line (agains threshold value) in \code{mc.plot()} is enhanced.}
+}
+}
+
+
 \section{Changes in mctest version 1.25 (2019-11-09)}{
 \itemize{
 \item {A Correction in is made in Farrar and Glauber Chi-Square formula. }

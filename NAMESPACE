@@ -10,4 +10,4 @@ importFrom("graphics", "abline", "axis", "mtext", "par", "plot","text")
 
 importFrom("stats", "complete.cases", "lm", "qchisq", "qf", "sd")
 
-
+importFrom("stats", "model.matrix", "model.frame")

@@ -4,10 +4,9 @@
 \description{
 Plot of VIF and Eigenvalues for detection of multicollinearity among regressors. The VIF and Eigenvalues are also displayed on graph. Eigenvalues plot can be displayed with or without inclusion of intercept term.
 }
-\usage{mc.plot(x, y, Inter = FALSE, vif = 10, ev = 0.01, ...)}
+\usage{mc.plot(mod, Inter = FALSE, vif = 10, ev = 0.01, ...)}
 \arguments{
-  \item{x}{A numeric design matrix and should contain more than one regressor.}
-  \item{y}{A numeric vector of response variable.}
+  \item{mod }{A model object, not necessarily type \code{lm} }
   \item{Inter}{Whether to include or exclude Intercept term, by default \code{Inter=FALSE}.}
   \item{vif}{Threshold of VIF and will appear as horizontal line on VIF plot. The default value is \code{vif=10}.}
   \item{ev}{Threshold of Eigenvalues and will appear as horizontal line on Eigenvalues plot. The default value is \code{ev=0.01}.}
@@ -39,20 +38,21 @@ Imdadullah, M., Aslam, M., and Altaf, S. mctest: An R Package for Detection of C
 \examples{
 ## Hald Cement data
 data(Hald)
-x<-Hald[,-1]
-y<-Hald[,1]
+model <- lm(y~X1+X2+X3+X4, data = as.data.frame(Hald))
 
 ## plot with default threshold of VIF and Eigenvalues with no intercept
-mc.plot(x, y)
+mc.plot(model)
 
 ## plot with default threshold of VIF and Eigenvalues with intercept
-mc.plot(x, y, Inter = TRUE)
+mc.plot(model, Inter = TRUE)
 
 ## plot with specific threshold of VIF and Eigenvalues with no intercept
-mc.plot(x, y, vif = 5, ev = 20)
+mc.plot(model, vif = 5, ev = 20)
 
 ## plot with specific threshold of VIF and Eigenvalues with intercept
-mc.plot(x, y, vif = 5, ev = 20, Inter = TRUE)
+mc.plot(model, vif = 5, ev = 20, Inter = TRUE)
 }
-\keyword{VIF }
-\keyword{Eigenvalues}
+
+\keyword{VIF Plot}
+\keyword{Eigenvalues Plot}
+\keyword{Collinearity Diagnostics Plots}

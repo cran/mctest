@@ -1,10 +1,13 @@
-omcdiag<-function(x, y, na.rm = TRUE, Inter = TRUE, detr = 0.01, red = 0.5,
+omcdiag<-function(mod, na.rm = TRUE, Inter = TRUE, detr = 0.01, red = 0.5,
                   conf = 0.95, theil = 0.5,cn = 30,...){
   cl<-match.call()
 
-  x<-as.matrix(x)
-  y<-as.matrix(y)
-
+  if (!is.null(mod$call$formula) ){
+    x <- as.matrix(model.frame(mod)[,-1]) # Regressors only 
+    y <- as.matrix(model.frame(mod)[,1]) # dependent variablevariable
+  }
+  
+    
   match.call()
 
   #from lm.fit (extra argument handling)
@@ -80,7 +83,7 @@ omcdiag<-function(x, y, na.rm = TRUE, Inter = TRUE, detr = 0.01, red = 0.5,
 #  xz<-apply(ex,2,function(ex){ex/sqrt(sum(ex^2))})
 #  Eigval<-eigen(t(xz)%*%xz)$values
 #  P<- eigen(t(xz)%*%xz)$vectors
-CN<-max(eigprop(x, Inter = Inter)$ci)
+CN<-max(eigprop(mod, Inter = Inter)$ci)
 #  CN<-sqrt(max(Eigval)/min(Eigval))
   CN<-cbind(CN,CN>cn)
 

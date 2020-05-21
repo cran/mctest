@@ -1,7 +1,15 @@
-eigprop <- function(x, na.rm = TRUE, Inter = TRUE, prop = 0.5, ...){
+eigprop <- function(mod, na.rm = TRUE, Inter = TRUE, prop = 0.5, ...){
 
   cl<-match.call()
-  x<-as.matrix(x)
+  if (!is.null(mod$call$formula)){
+    if (Inter==FALSE)
+    x <- as.matrix(model.frame(mod)[,-1]) # Regressors only 
+    #y <- as.matrix(model.frame(mod)[,1]) # dependent variable
+  }
+  if (Inter==TRUE) 
+    x <- as.matrix(mod$model)
+  
+#  x<-as.matrix(x)
 #  y<-as.matrix(y)
 
   match.call()
@@ -39,15 +47,15 @@ eigprop <- function(x, na.rm = TRUE, Inter = TRUE, prop = 0.5, ...){
 #  nvar<-ncol(x)
 #  n<-nrow(x)
 
-if(Inter==TRUE){
-  ex<-cbind(1,x)
-  colnames(ex)<-c("Intercept", colnames(x))
-}else {
-  ex<-x
-  colnames(ex)<-colnames(x)
-}
+#if(Inter==TRUE){
+#  ex<-cbind(1,x)
+#  colnames(ex)<-c("Intercept", colnames(x))
+#}else {
+#  ex<-x
+#  colnames(ex)<-colnames(x)
+#}
 
-xz<-apply(ex,2,function(ex){ex/sqrt(sum(ex^2))})
+xz<-apply(x,2,function(x){x/sqrt(sum(x^2))})
 
 corxz<-t(xz)%*%xz
 

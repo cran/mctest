@@ -7,22 +7,21 @@
 The function \code{mctest} display overall, individual or both types of multicollinearity diagnostic measures from \code{omcdiag} and \code{imcdiag} functions, respectively.}
 
 \usage{
-mctest(x, y, type=c("o","i","b"), na.rm = TRUE, Inter=TRUE, method=NULL,
+mctest(mod, type=c("o","i","b"), na.rm=TRUE, Inter=TRUE, method=NULL,
         corr=FALSE, detr=0.01, red=0.5, theil=0.5, cn=30, vif=10, tol=0.1,
         conf=0.95, cvif=10, ind1=0.02, ind2=0.7, leamer=0.1, all=FALSE, ...)
 }
 \arguments{
-  \item{x}{A numeric design matrix and should contain more than one regressor.}
-  \item{y}{A numeric vector of response variable.}
-  \item{na.rm}{Whether to remove missing observations.}
-  \item{Inter}{Whether to include or exclude Intercept term. By default \code{Inter=TRUE}.}
-  \item{type}{Displays overall, individual or both type of collinearity diagnostics. Overall collinearity diagnostics are displayed by default with eigenvalues and condition indexes, when \code{method} and \code{type} argument are not used.}
+  \item{mod }{A model object, not necessarily type \code{lm} }
+  \item{na.rm }{Whether to remove missing observations.}
+  \item{Inter }{Whether to include or exclude Intercept term. By default \code{Inter=TRUE}.}
+  \item{type }{Displays overall, individual or both type of collinearity diagnostics. Overall collinearity diagnostics are displayed by default with eigenvalues and condition indexes, when \code{method} and \code{type} argument are not used.}
   \item{method }{Specific individual measure of collinearity such as VIF, TOL, CVIF, Leamer, IND1, and IND2  etc, when \code{method} argument is used. For example, \code{method="VIF"}.}
   \item{corr }{Whether to display correlation matrix or not \code{Inter=TRUE}.}
-\item{detr}{Determinant default threshold, \code{detr=0.01}.}
-  \item{red}{Red indicator default threshold, \code{red=0.5}.}
-  \item{theil}{Theil's indicator default threshold, \code{theil=0.5}.}
-  \item{cn}{Condition number default threshold, \code{cn=30}.}
+\item{detr }{Determinant default threshold, \code{detr=0.01}.}
+  \item{red }{Red indicator default threshold, \code{red=0.5}.}
+  \item{theil }{Theil's indicator default threshold, \code{theil=0.5}.}
+  \item{cn }{Condition number default threshold, \code{cn=30}.}
   \item{vif }{Default threshold for VIF measure, \code{vif=10}.}
   \item{conf }{Default confidence level for Farrar's test, \code{conf=0.99}.}
   \item{cvif }{Default threshold for CVIF measure, \code{CVIF=10}.}
@@ -59,47 +58,46 @@ Imdad, M. U., Aslam, M., Altaf, S., and Ahmed, M. Some New Diagnostics of Multic
 \examples{
 ## Hald Cement data
 data(Hald)
-x<-Hald[,-1]
-y<-Hald[,1]
+model <- lm(y~X1+X2+X3+X4, data = as.data.frame(Hald))
 
 ## Overall diagnostic measures and eigenvalues with intercept term
-mctest(x, y)
+mctest(model)
 
 ## Overall diagnostic measures and eigenvalues without intercept term
-mctest(x, y, Inter=FALSE)
+mctest(model, Inter=FALSE)
 
 ## all individual diagnostic measures
-mctest(x, y, type="i")
+mctest(model, type="i")
 
 ## certain individual diagnostic measures with collinearity detection indication
-VIF<-mctest(x, y, type="i", method="VIF")
+VIF<-mctest(model, type="i", method="VIF")
 VIF[[1]][,1] # named VIF values only
 
-IND1<-mctest(x, y, type="i", method="IND1")
+IND1<-mctest(model, type="i", method="IND1")
 IND1[[1]][,1] # named IND1 values only
 
 ## all individual diagnostic measures with correlation matrix
-mctest(x, y, type="i", corr=TRUE)
+mctest(model, type="i", corr=TRUE)
 
 ## VIF and correlation matrix with collinearity detection indication
-mctest(x, y, type="i", method="VIF", corr=TRUE)
+mctest(model, type="i", method="VIF", corr=TRUE)
 
 ## both overall and individual collinearity diagnostics
-mctest(x, y, type="b")
-mctest(x, y, type="b", method="VIF", cor=TRUE)
+mctest(model, type="b")
+mctest(model, type="b", method="VIF", cor=TRUE)
 
 ## all overall and vif with correlation matrix
 ## VIF and CN desired threshold
 ## eigenvalues without intercept term
-mctest(x, y, type="b", method="VIF", Inter=FALSE, vif=15, cn=35)
+mctest(model, type="b", method="VIF", Inter=FALSE, vif=15, cn=35)
 
 ## Individual collinearity diagnostic measures in matrix of 0 or 1
-mctest(x, y, all = TRUE)
-mctest(x, y, method = "VIF", all = TRUE)
-mctest(x, y, type="b", all = TRUE)
+mctest(model, all = TRUE)
+mctest(model, method = "VIF", all = TRUE)
+mctest(model, type="b", all = TRUE)
 
 }
 
-\keyword{ Multicollinearity }
+\keyword{ Multicollinearity Diagnostics}
 \keyword{ Overall collinearity diagnostic measures }
 \keyword{ Individual collinearity diagnostic measures }

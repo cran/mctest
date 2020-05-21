@@ -16,3 +16,5 @@ For a complete list of functions, use \code{library(help="mctest")}.
 \author{Muhammad Imdad Ullah, Muhammad Aslam}
 
 \keyword{mctest package }
+\keyword{Multicollinearity Diagnostics}
+\keyword{Regression Diagnostics}

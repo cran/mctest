@@ -1,5 +1,6 @@
-mc.plot<-function(x, y, Inter = FALSE, vif = 10, ev = 0.01, ...){
+mc.plot<-function(mod, Inter = FALSE, vif = 10, ev = 0.01, ...){
 
+  
   #from lm.fit (extra argument handling)
   if(length(list(...))>1L)
   {warning("Extra arguments ", paste(sQuote(names(list(...) ) ) , sep=", "),
@@ -9,19 +10,24 @@ mc.plot<-function(x, y, Inter = FALSE, vif = 10, ev = 0.01, ...){
 
   par(mfrow=c(2,1),mar=c(3,4,3,1))
 
+  if (!is.null(mod$call$formula)){
+    x <- as.matrix(model.frame(mod)[,-1]) # Regressors only 
+    #y <- as.matrix(model.frame(mod)[,1]) # dependent variable
+  }
+
   xcol=colnames(x)
 
   if(Inter==TRUE || is.null(Inter) ){
-    Eigval<-eigprop(x, Inter = TRUE)$ev
+    Eigval<-eigprop(mod, Inter = TRUE)$ev
     xs=length(xcol)+1
     lends=c("Intercept", xcol)
   }else{
-    Eigval<-eigprop(x, Inter = FALSE)$ev
+    Eigval<-eigprop(mod, Inter = FALSE)$ev
     xs=length(xcol)
     lends=xcol
   }
 
-  VIF<-imcdiag(x, y, method = "VIF")[[1]][,1]
+  VIF<-imcdiag(mod, method = "VIF")[[1]][,1]
 # VIF Plot and setting
   plot(VIF,
        lty=1,
@@ -50,15 +56,12 @@ mc.plot<-function(x, y, Inter = FALSE, vif = 10, ev = 0.01, ...){
          lwd=2
          )
   text(1,
-       vif,
-       paste("vif=",vif),
-       col="blue",
+       max(VIF),
+       paste("VIF threshold =",vif, sep=" "),
+       col="red",
        cex=1,
        pos=4
        )
-#  mtext("Regressors",  side=1,padj=-2, outer=TRUE)
-  #title("Multcollinearity Detection Plots")
-  #points(vif,cex=1, col="red")
 
 # Eigenvalues plot and settings
   plot(Eigval,
@@ -80,19 +83,21 @@ mc.plot<-function(x, y, Inter = FALSE, vif = 10, ev = 0.01, ...){
        Eigval,
        round(Eigval,3),
        col="blue",
-       cex=.95
+       cex=0.95
        )
+  
   abline(h=ev,
          col="red",
          lty=2,
          lwd=2
-         )
-  text(1,
-       ev,
-       paste("EV=",ev),
-       col="blue",
+  )
+  
+  text(length(xcol),
+       max(Eigval),
+       paste("EV threshold =",ev, sep=" "),
+       col="red",
        cex=1,
-       pos=4
+       pos=2
        )
 
   #mtext("Regressors",  side=1,padj=-2, outer=TRUE)

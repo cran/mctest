@@ -7,20 +7,19 @@
 Computes different overall measures of multicollinearity diagnostics for matrix of regressors. Overall measures of collinearity detection includes Determinant of the correlation matrix (Cooley and Lohnes, 1971), Farrar test of chi-square for presence of multicollinearity (Farrar and Glauber, 1967), Red Indicator (Kovacs et al., 2015) <doi: 10.1111/j.1751-5823.2005.tb00156.x>, Sum of lambda inverse Chatterjee and Price (1977) values, Theil's indicator (Theil, 1971) and condition number (Belsley et al., 1980) <doi: 10.1007/BF00426854> with or without intercept term.
 }
 
-\usage{omcdiag(x, y, na.rm = TRUE, Inter = TRUE, detr = 0.01, red = 0.5,
+\usage{omcdiag(mod, na.rm = TRUE, Inter = TRUE, detr = 0.01, red = 0.5,
                      conf = 0.95, theil = 0.5, cn = 30,...) }
 
 \arguments{
-  \item{x}{A numeric design matrix and should contain more than one regressor.}
-  \item{y}{A numeric vector of response variable.}
-  \item{na.rm}{Whether to remove missing observations.}
-  \item{Inter}{Whether to include or exclude Intercept term, by default \code{Inter=TRUE}.}
-  \item{detr}{Determinant default threshold, \code{detr=0.01}.}
-  \item{red}{red indicator default threshold, \code{red=0.5}.}
-  \item{conf}{confidence level of Farrar Chi-Square test, \code{conf=0.95}.}
-  \item{theil}{Theil's indicator default threshold, \code{theil=0.5}.}
-  \item{cn}{condition number default threshold, \code{cn=30}.}
-  \item{\dots}{Extra argument(s) if used will be ignored.}
+  \item{mod }{A model object, not necessarily type \code{lm} }
+  \item{na.rm }{Whether to remove missing observations.}
+  \item{Inter }{Whether to include or exclude Intercept term, by default \code{Inter=TRUE}.}
+  \item{detr }{Determinant default threshold, \code{detr=0.01}.}
+  \item{red }{red indicator default threshold, \code{red=0.5}.}
+  \item{conf }{confidence level of Farrar Chi-Square test, \code{conf=0.95}.}
+  \item{theil }{Theil's indicator default threshold, \code{theil=0.5}.}
+  \item{cn }{condition number default threshold, \code{cn=30}.}
+  \item{\dots }{Extra argument(s) if used will be ignored.}
 }
 
 \details{
@@ -61,22 +60,21 @@ Individual collinearity diagnostic measure  \code{\link{imcdiag}}, Eigenvalues a
 \examples{
 ## Hald Cement data
 data(Hald)
-x<-Hald[,-1]
-y<-Hald[,1]
+model <- lm(y~X1+X2+X3+X4, data = as.data.frame(Hald))
 
 ## all oveall diagnostic measures and eigenvalues with intercept
-od<-omcdiag(x,y)
+od<-omcdiag(model)
 
 ## all oveall diagnostic measures and eigenvalues without intercept
-omcdiag(x,y, Inter=FALSE)
+omcdiag(model, Inter=FALSE)
 
 ## all oveall diagnostic measures and eigenvalues with intercept
 ## with different determinant and confidence level threshold
 
-omcdiag(x,y, detr=0.001, conf=0.99)
+omcdiag(model, detr=0.001, conf=0.99)
 
 ## returns the determinant of correlation matrix |X'X|
-omcdiag(x,y)[1]
+omcdiag(model)[1]
 }
 
 \keyword{Farrar Chi-Square }
@@ -85,3 +83,4 @@ omcdiag(x,y)[1]
 \keyword{Theil's Indicator}
 \keyword{Determinent of correlation matrix}
 \keyword{sum of lambda inverse values}
+\keyword{Overall Multicollinearity Diagnostics}

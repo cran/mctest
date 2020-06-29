@@ -11,7 +11,7 @@ mc.plot<-function(mod, Inter = FALSE, vif = 10, ev = 0.01, ...){
   par(mfrow=c(2,1),mar=c(3,4,3,1))
 
   if (!is.null(mod$call$formula)){
-    x <- as.matrix(model.frame(mod)[,-1]) # Regressors only 
+    x <- model.matrix(mod)[, -1] # Regressors only 
     #y <- as.matrix(model.frame(mod)[,1]) # dependent variable
   }
 

@@ -1,5 +1,12 @@
 \name{NEWS}
 \title{News for Package 'mctest'}
+\section{change in mctest version 1.3.1 (2020-06-29)}{
+\itemize{
+\item {Input argument} \code{x} in all functions of \code{mctest} package is changed to \code{model.matrix()} instead of \code{as.matrix()} for the acdeptance of factor variables as regressors. The numeric condition of \code{X} matrix is also omitted.
+}
+}
+
+
 \section{Changes in mctest version 1.3 (2020-05-20)}{
 \itemize{
 \item {Input argument \code{x} and \code{y} are deferred.}

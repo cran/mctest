@@ -5,21 +5,21 @@ mctest<-function(mod, type=c("o","i","b"), na.rm = TRUE, Inter=TRUE, method=NULL
   type<-match.arg(type)
 
     if (!is.null(mod$call$formula)){
-    x <- as.matrix(model.frame(mod)[,-1]) # Regressors only 
-    y <- as.matrix(model.frame(mod)[,1]) # dependent variable
+      x <- model.matrix(mod)[, -1] # Regressors only 
+      y <- as.matrix(model.frame(mod)[, 1]) # dependent variable
   }
   
 
     if(ncol(x)<2)
         stop('X matrix must contain more than one variable')
 
-    if(!is.numeric(x) || !is.numeric(y))
-        stop('X must be a numeric matrix')
+#    if(!is.numeric(x) || !is.numeric(y))
+#        stop('X must be a numeric matrix')
 
     if(nrow(x)!=length(y))
         stop('X and y contain different numbers of observations')
 
-    #remove the missing values and re-create the data set
+#remove the missing values and re-create the data set
     if( na.rm ) {
         df<-as.data.frame(cbind(x,y)) #data
         ncolxy<-ncol(df)

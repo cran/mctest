@@ -3,8 +3,8 @@ imcdiag<-function(mod, method = NULL, na.rm = TRUE, corr = FALSE,
                   ind1 = 0.02, ind2 = 0.7, leamer = 0.1, all = FALSE, ...){
 
   if (!is.null(mod$call$formula) ){
-    x <- as.matrix(model.frame(mod)[,-1]) # Regressors only 
-    y <- as.matrix(model.frame(mod)[,1]) # dependent variable
+    x <- model.matrix(mod)[, -1] # Regressors only 
+    y <- as.matrix(model.frame(mod)[, 1]) # dependent variable
   }
 
 
@@ -25,13 +25,13 @@ cl<-match.call()
   if(ncol(x) < 2)
     stop('X matrix must contain more than one variable')
 
-  if(!is.numeric(x) || !is.numeric(y))
-    stop('X must be a numeric matrix')
+#  if(!is.numeric(x) || !is.numeric(y))
+#    stop('X must be a numeric matrix')
 
   if(nrow(x)!=length(y))
     stop('X and y contain different numbers of observations')
 
-  #remove the missing values and re-create the data set
+#remove the missing values and re-create the data set
   if( na.rm ) {
     df<-as.data.frame(cbind(x,y)) #data
     ncolxy<-ncol(df)

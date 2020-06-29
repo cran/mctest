@@ -3,11 +3,11 @@ eigprop <- function(mod, na.rm = TRUE, Inter = TRUE, prop = 0.5, ...){
   cl<-match.call()
   if (!is.null(mod$call$formula)){
     if (Inter==FALSE)
-    x <- as.matrix(model.frame(mod)[,-1]) # Regressors only 
+    x <- model.matrix(mod)[, -1] # Regressors only 
     #y <- as.matrix(model.frame(mod)[,1]) # dependent variable
   }
   if (Inter==TRUE) 
-    x <- as.matrix(mod$model)
+    x <- model.matrix(mod)
   
 #  x<-as.matrix(x)
 #  y<-as.matrix(y)
@@ -26,14 +26,10 @@ eigprop <- function(mod, na.rm = TRUE, Inter = TRUE, prop = 0.5, ...){
   if(ncol(x) < 2)
     stop('X matrix must contain more than one variable')
 
-#  if(!is.numeric(x) || !is.numeric(y))
-  if(!is.numeric(x))
-    stop('X must be a numeric matrix')
+#  if(!is.numeric(x))
+#    stop('X must be a numeric matrix')
 
-#  if(nrow(x)!=length(y))
-#    stop('X and y contain different numbers of observations')
-
-  #remove the missing values and re-create the data set
+#remove the missing values and re-create the data set
   if( na.rm ) {
     df<-as.data.frame(x) #data
 #    ncolxy<-ncol(df)
